@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #user路由
 
-    url(r'^', include('PPAP_server.apps.user.urls')),
+    url(r'^', include('user.urls')),
 ]
