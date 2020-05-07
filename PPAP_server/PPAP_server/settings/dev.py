@@ -28,7 +28,7 @@ sys.path.insert(0,os.path.join(BASE_DIR, "apps"))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a5c^cfk37a!%=hw#b4kdh(i&ny&3(dwb16_44i9#j^-&@749@y'
+SECRET_KEY = 'secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'user',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -202,6 +204,10 @@ REST_FRAMEWORK = {
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer ',
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'PPAP_server.utils.jwt_response.jwt_response_payload_handler',
 }
 
 AUTH_USER_MODEL = 'user.User'
+
+AUTHENTICATION_BACKENDS = ['PPAP_server.utils.my_authenticate.Myauthenticate']
