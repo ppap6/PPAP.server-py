@@ -21,5 +21,5 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     #user路由
     # url(r'^authorizations/$', obtain_jwt_token),
-    url(r'^user/', include('user.urls')),
+    url(r'', include('user.urls')),
 ]

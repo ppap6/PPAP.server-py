@@ -7,5 +7,10 @@ from . import views
 urlpatterns = [
     # 注册
     url(r'^register/$', views.Register.as_view()),
-    url(r'^login/$', obtain_jwt_token),
+    url(r'^user/login/$', obtain_jwt_token),
 ]
+
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(prefix='user',viewset=views.UserView, basename="user")
+urlpatterns += router.urls
