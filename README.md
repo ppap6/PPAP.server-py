@@ -1,5 +1,5 @@
 # PPAP.server-py
-使用django搭建的后台
+使用Django搭建的后台
 
 ## 开发路线
 ### 模块目录
