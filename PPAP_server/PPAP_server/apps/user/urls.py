@@ -5,7 +5,6 @@ from rest_framework_jwt.views import obtain_jwt_token
 from . import views
 
 urlpatterns = [
-    # 注册
     url(r'^register/$', views.Register.as_view()),
     url(r'^user/login/$', obtain_jwt_token),
 ]

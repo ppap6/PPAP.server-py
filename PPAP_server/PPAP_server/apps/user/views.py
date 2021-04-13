@@ -28,19 +28,7 @@ class UserView(ModelViewSet):
     pagination_class = MyPageNumberPagination
 
     def update(self, request, *args, **kwargs):
-        try:
-            pk = kwargs.pop("pk")
-            data = request.data
-            gender = data.get('gender')
-            user_name = data.get('user_name')
-            email = data.get('email')
-            role_id = data.get('role_id')
-            User.objects.filter(id=pk).update(gender=gender, user_name=user_name, email=email, role_id=role_id)
-            # User.objects.filter(id=pk).update(**data)
-            return Response({"status": 200,"message": "操作成功"})
-
-        except:
-            return Response({"status": 500,"message": "操作失败"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        response = super().update(request,*args, **kwargs,partial=True)
+        return response
 
 

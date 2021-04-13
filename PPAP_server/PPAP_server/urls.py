@@ -22,4 +22,5 @@ urlpatterns = [
     #user路由
     # url(r'^authorizations/$', obtain_jwt_token),
     url(r'', include('user.urls')),
+    url(r'', include('role.urls')),
 ]

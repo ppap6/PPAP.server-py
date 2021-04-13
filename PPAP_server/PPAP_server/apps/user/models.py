@@ -17,6 +17,11 @@ from django.contrib.auth.models import  AbstractBaseUser,AbstractUser
 #     class Meta:
 #         managed = False
 #         db_table = 'test'
+from django.utils import timezone
+
+from role.models import Role
+
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -34,13 +39,12 @@ class UserManager(BaseUserManager):
 
     def create_user(self, account, password=None, **extra_fields):
         extra_fields.setdefault('gender', 0)
-        extra_fields.setdefault('role_id', 0)
+        extra_fields.setdefault('role_id', 5)
         extra_fields.setdefault('user_name', "user"+ str(random.randint(1,10000)))
         return self._create_user(account, password, **extra_fields)
 
 class User(AbstractBaseUser):
     GENDER_CHOICES = ((0, 'unknow'), (1, 'female'), (2, 'male'))
-    ROLE_CHOICES = ((0, '平民'),(2, '贵宾'))
 
     account = models.CharField(max_length=20, blank=True, null=True, unique=True)
     email = models.CharField(max_length=20, blank=True, null=True)
@@ -49,9 +53,9 @@ class User(AbstractBaseUser):
     user_name = models.CharField(max_length=10)
     avatar = models.CharField(max_length=128, blank=True, null=True)
     bg = models.CharField(max_length=128, blank=True, null=True)
-    create_time = models.DateTimeField(db_column='create_ time', blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    update_time = models.DateTimeField(blank=True, null=True)
-    role_id = models.SmallIntegerField(choices=ROLE_CHOICES, default=0,verbose_name='角色')
+    create_time = models.DateTimeField(default=timezone.now(),db_column='create_ time', blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    update_time = models.DateTimeField(default=timezone.now(),blank=True, null=True)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE,verbose_name='角色')
 
     USERNAME_FIELD = 'account'
     objects = UserManager()
