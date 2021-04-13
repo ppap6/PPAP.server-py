@@ -16,5 +16,5 @@ db.ini
 deploy_key_rsa
 *.cnf
 *.log
-
+PPAP_server/PPAP_server/settings/
 .idea/
